@@ -1,0 +1,1 @@
+通过OpenFeign调用已经注册在Eureka中的服务
