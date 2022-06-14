@@ -22,6 +22,7 @@ import java.util.Map;
 @Slf4j
 @RestController(value = "/consumer")
 public class RestConsumerController {
+    // 注入RestTemplate
     private final RestTemplate restTemplate;
 
     @Value("${server.port}")
@@ -40,10 +41,11 @@ public class RestConsumerController {
                 restTemplate.getForObject("http://nacos-provider/sayHello", String.class);
     }
 
+    // 在消费者这里采用的是get方法，但是去请求提供生产者是使用的post方法
     @GetMapping(value = "/get-id/{id}")
     public String getId(@PathVariable("id") Integer id) {
         log.info(String.valueOf(id));
-        // Map<String, Integer> param = new HashMap<>();
+        // RestTemplate的传参需要MultiValueMap数据结构
         MultiValueMap<String, Integer> param = new LinkedMultiValueMap<>();
         param.add("id", id);
         return "<h2>访问成功！</h2>服务名：nacos-consumer<br/> 端口号：" +

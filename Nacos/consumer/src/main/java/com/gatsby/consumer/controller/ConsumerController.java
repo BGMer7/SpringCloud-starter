@@ -24,7 +24,7 @@ public class ConsumerController {
     @GetMapping("/consumer")
     public String consumer(@RequestParam Integer id) {
         log.info(String.valueOf(id));
-        // 向调用本地方法一样，调用 openfeign client 中的方法
+        // 调用Feign方法，类RPC
         return consumer.call(id);
     }
 }
