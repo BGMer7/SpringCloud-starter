@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient("nacos-provider")      // nacos服务 id
 public interface ConsumerClient {
-    @GetMapping("/nacos/{id}")
-    String call(@PathVariable("id") Integer id);
+    @GetMapping("/sayHello")
+    String call();
 }
