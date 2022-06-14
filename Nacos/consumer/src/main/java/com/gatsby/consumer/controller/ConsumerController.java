@@ -2,8 +2,7 @@ package com.gatsby.consumer.controller;
 
 import com.gatsby.consumer.service.ConsumerClient;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -15,7 +14,8 @@ import javax.annotation.Resource;
 
 
 @Slf4j
-@RestController(value = "/feign")
+@RestController
+@RequestMapping("/feign")
 public class ConsumerController {
     @Resource
     private final ConsumerClient consumerClient;      // 加载 openfeign client
@@ -28,6 +28,12 @@ public class ConsumerController {
     public String hello() {
         log.info("Consumer Feign Hello");
         // 调用Feign方法，类RPC
-        return consumerClient.call();
+        return consumerClient.sayHello();
     }
+
+    @GetMapping("/get-id/{id}")
+    public String getId(@PathVariable("id") Integer id) {
+        return "FeignClient gets message from: " + consumerClient.getId(id);
+    }
+
 }

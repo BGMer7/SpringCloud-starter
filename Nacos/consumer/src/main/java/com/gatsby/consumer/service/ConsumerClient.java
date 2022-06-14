@@ -3,6 +3,8 @@ package com.gatsby.consumer.service;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author -- gatsby
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient("nacos-provider")      // nacos服务 id
 public interface ConsumerClient {
-    @GetMapping("/sayHello")
-    String call();
+    @GetMapping("/provider/sayHello")
+    String sayHello();
+
+    @PostMapping("/provider/get-id")
+    String getId(@RequestParam Integer id);
 }

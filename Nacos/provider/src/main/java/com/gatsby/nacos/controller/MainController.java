@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
  * @description --
  */
 @Slf4j
-@RestController(value = "/provider")
+@RestController
+@RequestMapping("/provider")
 public class MainController {
     @Value("${server.port}")
     private String serverPort;
